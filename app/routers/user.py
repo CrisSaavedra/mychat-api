@@ -11,3 +11,4 @@ async def root():
 @UserRouter.get("/all")
 async def get_all_users( supabase: Client = Depends(get_supabase)):
     return supabase.table("users").select("*").execute()
+
