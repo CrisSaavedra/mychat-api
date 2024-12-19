@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from supabase import Client
 from db.connection import get_supabase
+from jose import JWTError, jwt
+import os
 import bcrypt
 
 #--- do in another file ---
@@ -12,6 +14,13 @@ class User(BaseModel):
     username: str | None = None
     
 #--------------------------
+
+
+#-- JWT CONFIG --
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = os.getenv("SECRET")
+#----------------
 
 AuthRouter = APIRouter()
 
@@ -46,3 +55,5 @@ async def login(user: User, supabase: Client = Depends(get_supabase)):
         return {"message": "Logged in successfully"}
     else:
         return {"message": "Invalid credentials"}
+    
+
