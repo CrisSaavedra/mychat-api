@@ -20,6 +20,7 @@ class User(BaseModel):
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 SECRET_KEY = os.getenv("SECRET")
+
 #----------------
 
 AuthRouter = APIRouter()
